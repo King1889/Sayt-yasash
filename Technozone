@@ -1,0 +1,1450 @@
+```html
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TECHZONE — Technology Store</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#172033;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#111827;
+    color:white;
+    box-shadow:0 3px 15px #0003;
+}
+
+.top{
+    max-width:1400px;
+    margin:auto;
+    padding:15px 25px;
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:900;
+    color:#00e5ff;
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#8b5cf6;
+}
+
+.search{
+    flex:1;
+    position:relative;
+}
+
+.search input{
+    width:100%;
+    padding:14px 50px 14px 18px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    font-size:15px;
+}
+
+.search-icon{
+    position:absolute;
+    right:17px;
+    top:13px;
+    font-size:20px;
+}
+
+.cart-btn{
+    border:none;
+    background:#8b5cf6;
+    color:white;
+    padding:13px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.cart-count{
+    background:#ef4444;
+    border-radius:50%;
+    padding:3px 7px;
+    margin-left:5px;
+}
+
+nav{
+    border-top:1px solid #ffffff15;
+}
+
+.nav-inner{
+    max-width:1400px;
+    margin:auto;
+    padding:12px 25px;
+    display:flex;
+    gap:25px;
+    overflow-x:auto;
+}
+
+nav button{
+    background:none;
+    border:none;
+    color:#dbeafe;
+    cursor:pointer;
+    white-space:nowrap;
+    font-size:14px;
+}
+
+nav button:hover{
+    color:#00e5ff;
+}
+
+/* HERO */
+
+.hero{
+    max-width:1400px;
+    margin:25px auto;
+    min-height:330px;
+    border-radius:25px;
+    padding:55px;
+    display:flex;
+    align-items:center;
+    background:
+    linear-gradient(90deg,#020617 10%,#020617cc 45%,transparent),
+    url("https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=1600&q=85")
+    center/cover;
+    color:white;
+}
+
+.hero h1{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.hero h1 span{
+    color:#00e5ff;
+}
+
+.hero p{
+    color:#d1d5db;
+    max-width:550px;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.hero-btn{
+    display:inline-block;
+    background:#8b5cf6;
+    color:white;
+    padding:14px 25px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* CATEGORY */
+
+.categories{
+    max-width:1400px;
+    margin:35px auto;
+    padding:0 20px;
+}
+
+.section-title{
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:12px;
+}
+
+.category{
+    background:white;
+    border-radius:15px;
+    padding:18px 10px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 3px 12px #0000000c;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-5px);
+    box-shadow:0 7px 20px #0002;
+}
+
+.category .emoji{
+    font-size:35px;
+    margin-bottom:8px;
+}
+
+.category p{
+    font-weight:bold;
+    font-size:13px;
+}
+
+/* FILTER */
+
+.shop{
+    max-width:1400px;
+    margin:40px auto;
+    padding:0 20px;
+}
+
+.toolbar{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    align-items:center;
+    margin-bottom:25px;
+    box-shadow:0 3px 12px #0000000b;
+}
+
+.toolbar select,
+.toolbar input{
+    padding:11px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    outline:none;
+}
+
+.price-range{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.price-range input{
+    width:120px;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:20px;
+}
+
+/* PRODUCT */
+
+.product{
+    position:relative;
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 3px 14px #0000000c;
+    transition:.25s;
+}
+
+.product:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px #0002;
+}
+
+.product-image{
+    position:relative;
+    height:210px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:15px;
+}
+
+.discount{
+    position:absolute;
+    left:10px;
+    top:10px;
+    background:#ef4444;
+    color:white;
+    padding:5px 9px;
+    border-radius:7px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.favorite{
+    position:absolute;
+    right:10px;
+    top:10px;
+    border:none;
+    background:white;
+    box-shadow:0 2px 10px #0002;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.favorite.active{
+    color:#ef4444;
+}
+
+.product-info{
+    padding:17px;
+}
+
+.category-name{
+    color:#8b5cf6;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.product h3{
+    margin:8px 0;
+    font-size:16px;
+    min-height:38px;
+}
+
+.rating{
+    color:#f59e0b;
+    font-size:13px;
+}
+
+.price{
+    margin:12px 0;
+}
+
+.old-price{
+    text-decoration:line-through;
+    color:#9ca3af;
+    font-size:13px;
+}
+
+.new-price{
+    color:#111827;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.add{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:9px;
+    background:#111827;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.add:hover{
+    background:#8b5cf6;
+}
+
+/* CART */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:2000;
+    display:none;
+}
+
+.overlay.show{
+    display:block;
+}
+
+.cart-panel{
+    position:absolute;
+    right:0;
+    top:0;
+    height:100%;
+    width:420px;
+    max-width:100%;
+    background:white;
+    padding:25px;
+    overflow-y:auto;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:none;
+    background:#eee;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.cart-item{
+    display:flex;
+    gap:12px;
+    border-bottom:1px solid #eee;
+    padding:15px 0;
+}
+
+.cart-item img{
+    width:75px;
+    height:75px;
+    object-fit:contain;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info h4{
+    font-size:14px;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:8px;
+}
+
+.qty button{
+    width:27px;
+    height:27px;
+    border:none;
+    background:#eee;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.remove{
+    border:none;
+    background:none;
+    color:#ef4444;
+    cursor:pointer;
+}
+
+.cart-total{
+    margin-top:25px;
+    font-size:23px;
+    font-weight:bold;
+}
+
+.checkout{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:none;
+    background:#8b5cf6;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* CHECKOUT MODAL */
+
+.checkout-modal{
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:3000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.checkout-modal.show{
+    display:flex;
+}
+
+.form{
+    background:white;
+    width:500px;
+    max-width:100%;
+    padding:30px;
+    border-radius:18px;
+}
+
+.form h2{
+    margin-bottom:20px;
+}
+
+.form input,
+.form select,
+.form textarea{
+    width:100%;
+    padding:13px;
+    margin-bottom:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
+
+.form textarea{
+    height:90px;
+    resize:none;
+}
+
+.form-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.form-buttons button{
+    flex:1;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.confirm{
+    background:#8b5cf6;
+    color:white;
+}
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    padding:50px 10px;
+    color:#6b7280;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111827;
+    color:#cbd5e1;
+    padding:50px 20px;
+    margin-top:60px;
+}
+
+.footer-grid{
+    max-width:1400px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:30px;
+}
+
+footer h3{
+    color:#00e5ff;
+    margin-bottom:15px;
+}
+
+footer p{
+    line-height:1.8;
+    font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .top{
+        flex-wrap:wrap;
+    }
+
+    .logo{
+        width:100%;
+        text-align:center;
+    }
+
+    .hero{
+        margin:15px;
+        padding:35px 25px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .product-info{
+        padding:12px;
+    }
+
+    .product h3{
+        font-size:14px;
+    }
+
+    .new-price{
+        font-size:17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="top">
+
+<div class="logo">
+TECH<span>ZONE</span>
+</div>
+
+<div class="search">
+<input
+id="search"
+type="text"
+placeholder="Mahsulot qidiring..."
+oninput="filterProducts()">
+<span class="search-icon">🔎</span>
+</div>
+
+<button class="cart-btn" onclick="openCart()">
+🛒 Savat
+<span class="cart-count" id="cartCount">0</span>
+</button>
+
+</div>
+
+<nav>
+
+<div class="nav-inner">
+
+<button onclick="setCategory('all')">🏠 Barchasi</button>
+<button onclick="setCategory('Gaming')">🎮 Gaming</button>
+<button onclick="setCategory('Audio')">🎧 Audio</button>
+<button onclick="setCategory('Telefon')">📱 Telefon</button>
+<button onclick="setCategory('Laptop')">💻 Laptop</button>
+<button onclick="setCategory('Kompyuter')">🖥️ Kompyuter</button>
+<button onclick="setCategory('3D Printer')">🖨️ 3D Printer</button>
+<button onclick="setCategory('Elektronika')">🔧 Elektronika</button>
+<button onclick="setCategory('Kamera')">📷 Kamera</button>
+<button onclick="setCategory('Aksessuar')">🔌 Aksessuar</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<section class="hero">
+
+<div>
+
+<h1>
+TECH <span>ZONE</span>
+</h1>
+
+<p>
+Gaming, programming, elektronika va zamonaviy
+texnologiyalar uchun 100 dan ortiq mahsulot.
+</p>
+
+<a href="#shop" class="hero-btn">
+Xarid qilish →
+</a>
+
+</div>
+
+</section>
+
+
+<section class="categories">
+
+<h2 class="section-title">🔥 Kategoriyalar</h2>
+
+<div class="category-grid">
+
+<div class="category" onclick="setCategory('Gaming')">
+<div class="emoji">🎮</div>
+<p>Gaming</p>
+</div>
+
+<div class="category" onclick="setCategory('Audio')">
+<div class="emoji">🎧</div>
+<p>Audio</p>
+</div>
+
+<div class="category" onclick="setCategory('Telefon')">
+<div class="emoji">📱</div>
+<p>Telefon</p>
+</div>
+
+<div class="category" onclick="setCategory('Laptop')">
+<div class="emoji">💻</div>
+<p>Laptop</p>
+</div>
+
+<div class="category" onclick="setCategory('Kompyuter')">
+<div class="emoji">🖥️</div>
+<p>PC</p>
+</div>
+
+<div class="category" onclick="setCategory('3D Printer')">
+<div class="emoji">🖨️</div>
+<p>3D Printer</p>
+</div>
+
+<div class="category" onclick="setCategory('Elektronika')">
+<div class="emoji">🔧</div>
+<p>Elektronika</p>
+</div>
+
+<div class="category" onclick="setCategory('Kamera')">
+<div class="emoji">📷</div>
+<p>Kamera</p>
+</div>
+
+<div class="category" onclick="setCategory('Aksessuar')">
+<div class="emoji">🔌</div>
+<p>Aksessuar</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="shop" id="shop">
+
+<h2 class="section-title">🛍️ Barcha mahsulotlar</h2>
+
+<div class="toolbar">
+
+<select id="categoryFilter" onchange="filterProducts()">
+
+<option value="all">Barcha kategoriyalar</option>
+<option>Gaming</option>
+<option>Audio</option>
+<option>Telefon</option>
+<option>Laptop</option>
+<option>Kompyuter</option>
+<option>3D Printer</option>
+<option>Elektronika</option>
+<option>Kamera</option>
+<option>Aksessuar</option>
+
+</select>
+
+<div class="price-range">
+
+<input id="minPrice" type="number" placeholder="Min so'm" oninput="filterProducts()">
+
+<span>—</span>
+
+<input id="maxPrice" type="number" placeholder="Max so'm" oninput="filterProducts()">
+
+</div>
+
+<select id="sort" onchange="filterProducts()">
+<option value="default">Saralash</option>
+<option value="low">Arzon → Qimmat</option>
+<option value="high">Qimmat → Arzon</option>
+<option value="name">Nom bo'yicha</option>
+</select>
+
+<span id="resultCount"></span>
+
+</div>
+
+<div class="product-grid" id="products"></div>
+
+</section>
+
+
+<!-- CART -->
+
+<div class="overlay" id="cartOverlay">
+
+<div class="cart-panel">
+
+<div class="cart-header">
+
+<h2>🛒 Savat</h2>
+
+<button class="close" onclick="closeCart()">×</button>
+
+</div>
+
+<div id="cartItems"></div>
+
+<div class="cart-total">
+Jami: <span id="cartTotal">0</span> so'm
+</div>
+
+<button class="checkout" onclick="openCheckout()">
+📦 Buyurtma berish
+</button>
+
+</div>
+
+</div>
+
+
+<!-- CHECKOUT -->
+
+<div class="checkout-modal" id="checkoutModal">
+
+<div class="form">
+
+<h2>📦 Buyurtma berish</h2>
+
+<input id="customerName" placeholder="Ismingiz">
+
+<input id="phone" placeholder="Telefon raqamingiz">
+
+<input id="address" placeholder="Yetkazib berish manzili">
+
+<select id="payment">
+
+<option>Naqd pul</option>
+<option>Bank karta</option>
+<option>Click</option>
+<option>Payme</option>
+</select>
+
+<textarea id="comment" placeholder="Qo'shimcha izoh"></textarea>
+
+<div class="form-buttons">
+
+<button onclick="closeCheckout()">Bekor qilish</button>
+
+<button class="confirm" onclick="confirmOrder()">
+Buyurtmani tasdiqlash
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div class="footer-grid">
+
+<div>
+<h3>TECHZONE</h3>
+<p>
+Gaming • Programming • Electronics • 3D Printing
+</p>
+</div>
+
+<div>
+<h3>Kategoriyalar</h3>
+<p>
+Gaming<br>
+Laptop<br>
+Telefon<br>
+3D Printer<br>
+Elektronika
+</p>
+</div>
+
+<div>
+<h3>Yordam</h3>
+<p>
+Yetkazib berish<br>
+To'lov usullari<br>
+Qaytarish<br>
+Aloqa
+</p>
+</div>
+
+<div>
+<h3>Aloqa</h3>
+<p>
+📞 +998 90 000 00 00<br>
+📧 info@techzone.uz<br>
+📍 Toshkent, Uzbekistan
+</p>
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   PRODUCTS — 100 TA
+========================= */
+
+const products = [
+
+/* AUDIO */
+
+["2E Gaming Headset","Audio",399000,"https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=700&q=80",10],
+["JBL Quantum 100","Audio",499000,"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80",15],
+["Sony WH-1000XM5","Audio",3999000,"https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=700&q=80",8],
+["HyperX Cloud III","Audio",1299000,"https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=700&q=80",12],
+["Razer BlackShark V2","Audio",1499000,"https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=700&q=80",10],
+["Logitech G Pro X","Audio",1799000,"https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=700&q=80",5],
+["AirPods Pro 2","Audio",2999000,"https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=700&q=80",10],
+["JBL Tune 770NC","Audio",999000,"https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=700&q=80",15],
+["Marshall Major V","Audio",2499000,"https://images.unsplash.com/photo-1487215078519-e21cc028cb29?auto=format&fit=crop&w=700&q=80",7],
+["Gaming Microphone RGB","Audio",799000,"https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=700&q=80",10],
+
+/* MOUSE */
+
+["Logitech G502 X","Gaming",1499000,"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=700&q=80",10],
+["Razer DeathAdder V3","Gaming",1199000,"https://images.unsplash.com/photo-1563297007-0686b7003af7?auto=format&fit=crop&w=700&q=80",15],
+["Razer Basilisk V3","Gaming",899000,"https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=700&q=80",10],
+["Bloody A60","Gaming",299000,"https://images.unsplash.com/photo-1563297007-0686b7003af7?auto=format&fit=crop&w=700&q=80",20],
+["Logitech G305","Gaming",699000,"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=700&q=80",15],
+["SteelSeries Rival 3","Gaming",599000,"https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=700&q=80",10],
+["ASUS ROG Gladius III","Gaming",1299000,"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=700&q=80",5],
+["Corsair Katar Pro","Gaming",499000,"https://images.unsplash.com/photo-1563297007-0686b7003af7?auto=format&fit=crop&w=700&q=80",12],
+["MSI Clutch GM41","Gaming",799000,"https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=700&q=80",10],
+["Gaming RGB Mouse","Gaming",349000,"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=700&q=80",20],
+
+/* KEYBOARD */
+
+["Razer BlackWidow V4","Gaming",2199000,"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80",10],
+["Logitech G Pro Keyboard","Gaming",1699000,"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80",15],
+["Keychron K2","Gaming",999000,"https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=700&q=80",10],
+["Royal Kludge RK61","Gaming",699000,"https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=700&q=80",20],
+["SteelSeries Apex Pro","Gaming",2499000,"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80",5],
+["ASUS ROG Strix Keyboard","Gaming",1899000,"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80",8],
+["HyperX Alloy Origins","Gaming",1399000,"https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=700&q=80",12],
+["Bloody B820R","Gaming",799000,"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80",15],
+["Redragon K552","Gaming",499000,"https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=700&q=80",20],
+["Mechanical RGB Keyboard","Gaming",599000,"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80",20],
+
+/* LAPTOP */
+
+["MacBook Air M3","Laptop",11999000,"https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=700&q=80",5],
+["MacBook Pro M4","Laptop",24999000,"https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=700&q=80",5],
+["ASUS ROG Strix G16","Laptop",18999000,"https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=700&q=80",10],
+["Lenovo Legion 5","Laptop",14999000,"https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=700&q=80",12],
+["HP Victus 16","Laptop",11999000,"https://images.unsplash.com/photo-1602080858428-57174f9431cf?auto=format&fit=crop&w=700&q=80",10],
+["Acer Nitro V","Laptop",10999000,"https://images.unsplash.com/photo-1593642532973-d31b6557fa68?auto=format&fit=crop&w=700&q=80",15],
+["MSI Katana 15","Laptop",13999000,"https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=700&q=80",8],
+["Dell XPS 15","Laptop",17999000,"https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?auto=format&fit=crop&w=700&q=80",5],
+["Acer Swift Go","Laptop",8999000,"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=80",12],
+["Lenovo IdeaPad 5","Laptop",7999000,"https://images.unsplash.com/photo-1484788984921-03950022c9ef?auto=format&fit=crop&w=700&q=80",15],
+
+/* MONITORS */
+
+["Samsung Odyssey G5 27","Kompyuter",3999000,"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=700&q=80",10],
+["LG UltraGear 27","Kompyuter",4299000,"https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=700&q=80",8],
+["ASUS TUF Gaming 27","Kompyuter",3499000,"https://images.unsplash.com/photo-1616711907328-0e9f2c3f1c4a?auto=format&fit=crop&w=700&q=80",12],
+["AOC Gaming 24G2","Kompyuter",2299000,"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=700&q=80",15],
+["MSI MAG 274QF","Kompyuter",3799000,"https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=700&q=80",10],
+["Xiaomi Curved 34","Kompyuter",5999000,"https://images.unsplash.com/photo-1527443192009-7e9d6f4c5e4f?auto=format&fit=crop&w=700&q=80",8],
+["Dell UltraSharp 27","Kompyuter",4999000,"https://images.unsplash.com/photo-1616711907328-0e9f2c3f1c4a?auto=format&fit=crop&w=700&q=80",5],
+["BenQ Zowie XL2411","Kompyuter",2799000,"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=700&q=80",10],
+["Philips 27 Gaming","Kompyuter",2999000,"https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=700&q=80",12],
+["Gaming Monitor 32","Kompyuter",4599000,"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=700&q=80",10],
+
+/* PHONES */
+
+["iPhone 17 Pro","Telefon",15999000,"https://images.unsplash.com/photo-1592286927505-2fd0f2c4c5a7?auto=format&fit=crop&w=700&q=80",5],
+["iPhone 17","Telefon",11999000,"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=700&q=80",8],
+["Samsung Galaxy S26","Telefon",12999000,"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=700&q=80",7],
+["Samsung Galaxy A56","Telefon",4999000,"https://images.unsplash.com/photo-1610792516307-ea5acd9c3b4d?auto=format&fit=crop&w=700&q=80",15],
+["Xiaomi 15","Telefon",7999000,"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=700&q=80",10],
+["Redmi Note 14","Telefon",3499000,"https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",20],
+["Google Pixel 10","Telefon",8999000,"https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=700&q=80",8],
+["OnePlus 13","Telefon",8999000,"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?auto=format&fit=crop&w=700&q=80",10],
+["Honor Magic 8","Telefon",7999000,"https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=700&q=80",12],
+["Nothing Phone","Telefon",5999000,"https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=700&q=80",10],
+
+/* 3D PRINTER */
+
+["Creality Ender-3 V3","3D Printer",4999000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",10],
+["Bambu Lab A1","3D Printer",6999000,"https://images.unsplash.com/photo-1612965110666-6c4b5e7b2a4e?auto=format&fit=crop&w=700&q=80",8],
+["Bambu Lab P1S","3D Printer",10999000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",5],
+["Creality K1","3D Printer",8999000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",10],
+["Anycubic Kobra 3","3D Printer",6999000,"https://images.unsplash.com/photo-1612965110666-6c4b5e7b2a4e?auto=format&fit=crop&w=700&q=80",12],
+["Elegoo Neptune 4","3D Printer",4999000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",15],
+["PLA Filament 1kg","3D Printer",199000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",20],
+["PETG Filament 1kg","3D Printer",249000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",20],
+["TPU Filament 1kg","3D Printer",299000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",15],
+["3D Printer Tool Kit","3D Printer",399000,"https://images.unsplash.com/photo-1631541909061-71e349d1f1c7?auto=format&fit=crop&w=700&q=80",10],
+
+/* ELECTRONICS */
+
+["Arduino Uno R3","Elektronika",149000,"https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=700&q=80",20],
+["Raspberry Pi 5","Elektronika",1199000,"https://images.unsplash.com/photo-1588007375246-3d6c2e9a8e7d?auto=format&fit=crop&w=700&q=80",10],
+["ESP32 Development Board","Elektronika",99000,"https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=700&q=80",20],
+["Arduino Sensor Kit","Elektronika",299000,"https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=700&q=80",15],
+["Robotics Starter Kit","Elektronika",599000,"https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=700&q=80",10],
+["Smart LED Strip","Elektronika",199000,"https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80",20],
+["USB Hub 7-Port","Elektronika",249000,"https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&w=700&q=80",15],
+["Mechanical Tool Set","Elektronika",299000,"https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=700&q=80",10],
+["Soldering Station","Elektronika",499000,"https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=700&q=80",12],
+["Digital Multimeter","Elektronika",199000,"https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=700&q=80",20],
+
+/* CAMERAS */
+
+["Canon EOS R50","Kamera",9999000,"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&q=80",5],
+["Sony Alpha A7 IV","Kamera",24999000,"https://images.unsplash.com/photo-1606986628253-3a3d1a0b6f8c?auto=format&fit=crop&w=700&q=80",5],
+["Canon EOS 90D","Kamera",12999000,"https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=700&q=80",7],
+["Sony ZV-E10","Kamera",7999000,"https://images.unsplash.com/photo-1606986628253-3a3d1a0b6f8c?auto=format&fit=crop&w=700&q=80",10],
+["GoPro Hero","Kamera",5999000,"https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=700&q=80",10],
+["DJI Osmo Pocket","Kamera",6999000,"https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=700&q=80",8],
+["Webcam Full HD","Kamera",399000,"https://images.unsplash.com/photo-1587826080692-f439cd0b70da?auto=format&fit=crop&w=700&q=80",15],
+["4K Streaming Camera","Kamera",999000,"https://images.unsplash.com/photo-1587826080692-f439cd0b70da?auto=format&fit=crop&w=700&q=80",12],
+["Camera Tripod","Kamera",299000,"https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=700&q=80",20],
+["LED Camera Light","Kamera",349000,"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&q=80",20],
+
+/* ACCESSORIES */
+
+["Anker PowerBank 20K","Aksessuar",499000,"https://images.unsplash.com/photo-1609592424844-2d8f9e1a0d35?auto=format&fit=crop&w=700&q=80",15],
+["65W GaN Charger","Aksessuar",399000,"https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80",20],
+["USB-C Cable","Aksessuar",99000,"https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=700&q=80",25],
+["HDMI 2.1 Cable","Aksessuar",149000,"https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&w=700&q=80",20],
+["Laptop Stand","Aksessuar",299000,"https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=700&q=80",15],
+["RGB Gaming Chair","Aksessuar",2999000,"https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=700&q=80",8],
+["Gaming Desk","Aksessuar",1999000,"https://images.unsplash.com/photo-1518455027359-f3f8164ba6b0?auto=format&fit=crop&w=700&q=80",10],
+["RGB LED Lamp","Aksessuar",249000,"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=80",20],
+["Smart Watch","Aksessuar",899000,"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80",15],
+["Wireless Charger","Aksessuar",199000,"https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=700&q=80",20]
+
+];
+
+
+/* =========================
+   STATE
+========================= */
+
+let cart=[];
+let currentCategory="all";
+
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
+
+function renderProducts(list){
+
+const container=document.getElementById("products");
+
+container.innerHTML="";
+
+document.getElementById("resultCount").innerText=
+list.length+" ta mahsulot";
+
+if(list.length===0){
+
+container.innerHTML=
+`<div class="empty">
+<h2>😕 Mahsulot topilmadi</h2>
+<p>Boshqa qidiruv so'zini yoki filtrni sinab ko'ring.</p>
+</div>`;
+
+return;
+}
+
+list.forEach((p,index)=>{
+
+const oldPrice=Math.round(p[2]/(1-p[4]/100));
+
+container.innerHTML+=`
+
+<div class="product">
+
+<div class="product-image">
+
+<img src="${p[3]}" alt="${p[0]}">
+
+${p[4]>0?
+`<div class="discount">-${p[4]}%</div>`:""}
+
+<button
+class="favorite"
+onclick="favorite(this)">
+♡
+</button>
+
+</div>
+
+<div class="product-info">
+
+<div class="category-name">${p[1]}</div>
+
+<h3>${p[0]}</h3>
+
+<div class="rating">
+★★★★★
+</div>
+
+<div class="price">
+
+${p[4]>0?
+`<div class="old-price">${format(oldPrice)} so'm</div>`:""}
+
+<div class="new-price">
+${format(p[2])} so'm
+</div>
+
+</div>
+
+<button class="add" onclick="addToCart(${indexOfProduct(p)})">
+🛒 Savatga qo'shish
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+/* =========================
+   SEARCH + FILTER
+========================= */
+
+function filterProducts(){
+
+const search=
+document.getElementById("search").value.toLowerCase();
+
+const category=
+document.getElementById("categoryFilter").value;
+
+const min=
+Number(document.getElementById("minPrice").value)||0;
+
+const max=
+Number(document.getElementById("maxPrice").value)||Infinity;
+
+const sort=
+document.getElementById("sort").value;
+
+let list=products.filter(p=>{
+
+const matchSearch=
+p[0].toLowerCase().includes(search);
+
+const matchCategory=
+category==="all" || p[1]===category;
+
+const matchPrice=
+p[2]>=min && p[2]<=max;
+
+return matchSearch && matchCategory && matchPrice;
+
+});
+
+if(sort==="low")
+list.sort((a,b)=>a[2]-b[2]);
+
+if(sort==="high")
+list.sort((a,b)=>b[2]-a[2]);
+
+if(sort==="name")
+list.sort((a,b)=>a[0].localeCompare(b[0]));
+
+renderProducts(list);
+
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+function setCategory(category){
+
+currentCategory=category;
+
+document.getElementById("categoryFilter").value=
+category==="all"?"all":category;
+
+document.getElementById("shop").scrollIntoView({
+behavior:"smooth"
+});
+
+filterProducts();
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function addToCart(index){
+
+const existing=
+cart.find(item=>item.index===index);
+
+if(existing){
+existing.qty++;
+}else{
+cart.push({
+index:index,
+qty:1
+});
+}
+
+updateCart();
+
+alert("✅ Mahsulot savatga qo'shildi!");
+
+}
+
+
+function updateCart(){
+
+document.getElementById("cartCount").innerText=
+cart.reduce((sum,item)=>sum+item.qty,0);
+
+const container=
+document.getElementById("cartItems");
+
+container.innerHTML="";
+
+if(cart.length===0){
+
+container.innerHTML=
+`<div class="empty">
+<h2>🛒</h2>
+<p>Savat bo'sh</p>
+</div>`;
+
+document.getElementById("cartTotal").innerText="0";
+
+return;
+}
+
+let total=0;
+
+cart.forEach((item,pos)=>{
+
+const p=products[item.index];
+
+total+=p[2]*item.qty;
+
+container.innerHTML+=`
+
+<div class="cart-item">
+
+<img src="${p[3]}">
+
+<div class="cart-item-info">
+
+<h4>${p[0]}</h4>
+
+<strong>${format(p[2])} so'm</strong>
+
+<div class="qty">
+
+<button onclick="changeQty(${pos},-1)">−</button>
+
+<span>${item.qty}</span>
+
+<button onclick="changeQty(${pos},1)">+</button>
+
+<button
+class="remove"
+onclick="removeItem(${pos})">
+🗑
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("cartTotal").innerText=
+format(total);
+
+}
+
+
+function changeQty(pos,value){
+
+cart[pos].qty+=value;
+
+if(cart[pos].qty<=0){
+cart.splice(pos,1);
+}
+
+updateCart();
+
+}
+
+
+function removeItem(pos){
+
+cart.splice(pos,1);
+
+updateCart();
+
+}
+
+
+function openCart(){
+
+document.getElementById("cartOverlay")
+.classList.add("show");
+
+updateCart();
+
+}
+
+
+function closeCart(){
+
+document.getElementById("cartOverlay")
+.classList.remove("show");
+
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+function openCheckout(){
+
+if(cart.length===0){
+
+alert("Savat bo'sh!");
+
+return;
+
+}
+
+closeCart();
+
+document.getElementById("checkoutModal")
+.classList.add("show");
+
+}
+
+
+function closeCheckout(){
+
+document.getElementById("checkoutModal")
+.classList.remove("show");
+
+}
+
+
+function confirmOrder(){
+
+const name=
+document.getElementById("customerName").value;
+
+const phone=
+document.getElementById("phone").value;
+
+const address=
+document.getElementById("address").value;
+
+if(!name || !phone || !address){
+
+alert("⚠️ Iltimos, ism, telefon va manzilni kiriting.");
+
+return;
+
+}
+
+const orderNumber=
+"TZ-"+Math.floor(Math.random()*900000+100000);
+
+alert(
+"🎉 Buyurtma qabul qilindi!\n\n"+
+"Buyurtma №: "+orderNumber+
+"\nMijoz: "+name+
+"\nTelefon: "+phone+
+"\n\nTez orada siz bilan bog'lanamiz."
+);
+
+cart=[];
+
+updateCart();
+
+closeCheckout();
+
+document.getElementById("customerName").value="";
+document.getElementById("phone").value="";
+document.getElementById("address").value="";
+document.getElementById("comment").value="";
+
+}
+
+
+/* =========================
+   FAVORITE
+========================= */
+
+function favorite(button){
+
+button.classList.toggle("active");
+
+button.innerText=
+button.classList.contains("active")?"♥":"♡";
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function format(number){
+
+return new Intl.NumberFormat("uz-UZ")
+.format(number);
+
+}
+
+function indexOfProduct(product){
+
+return products.indexOf(product);
+
+}
+
+
+/* START */
+
+renderProducts(products);
+
+</script>
+
+</body>
+</html>
+```
