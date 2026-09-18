@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UZ Shop — Online Do‘kon</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f7fb;color:#172033}
+header{background:#111827;color:white;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;gap:20px;position:sticky;top:0;z-index:10}
+.logo{font-size:25px;font-weight:800}.logo span{color:#22c55e}
+.search{flex:1;max-width:520px;padding:12px 18px;border:0;border-radius:12px;outline:none;font-size:15px}
+.cart-btn{background:#22c55e;color:#fff;border:0;padding:12px 18px;border-radius:12px;font-weight:bold;cursor:pointer}
+.hero{padding:55px 6%;background:linear-gradient(135deg,#111827,#26344e);color:white}
+.hero h1{font-size:42px;margin-bottom:12px}.hero p{color:#cbd5e1;font-size:17px;margin-bottom:25px}
+.hero button{background:#22c55e;border:0;color:white;padding:13px 22px;border-radius:10px;font-weight:bold;cursor:pointer}
+.container{padding:35px 6%}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
+.cat{border:1px solid #d7dce5;background:white;padding:10px 16px;border-radius:20px;cursor:pointer}
+.cat.active,.cat:hover{background:#22c55e;color:white;border-color:#22c55e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px}
+.card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 5px 18px #0000000b;transition:.2s}
+.card:hover{transform:translateY(-4px)}
+.pic{height:210px;background:#fff;display:flex;align-items:center;justify-content:center;padding:12px}.pic img{width:100%;height:100%;object-fit:contain}.cart-img{width:70px;height:70px;object-fit:contain;background:#f1f5f9;border-radius:8px}
+.info{padding:17px}.info h3{margin-bottom:8px}.info p{color:#64748b;font-size:14px;min-height:38px}
+.price{font-size:19px;font-weight:800;margin:13px 0}
+.add{width:100%;padding:11px;border:0;border-radius:10px;background:#111827;color:white;cursor:pointer;font-weight:bold}
+.add:hover{background:#22c55e}
+footer{text-align:center;padding:30px;color:#64748b}
+.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:20}
+.cart{position:absolute;right:0;top:0;height:100%;width:min(430px,100%);background:white;padding:25px;overflow:auto}
+.close{float:right;border:0;background:none;font-size:25px;cursor:pointer}
+.cart h2{margin-bottom:20px}.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #e5e7eb}
+.cart-item .emoji{font-size:35px}.cart-item strong{display:block;margin-bottom:8px}
+.qty button{border:0;background:#e5e7eb;width:27px;height:27px;border-radius:6px;cursor:pointer}
+.total{font-size:21px;font-weight:800;margin:22px 0}
+.order{width:100%;padding:14px;background:#22c55e;color:white;border:0;border-radius:10px;font-weight:bold;cursor:pointer}
+.empty{color:#64748b;text-align:center;padding:30px}
+@media(max-width:650px){header{flex-wrap:wrap}.search{order:3;max-width:none;width:100%}.hero h1{font-size:32px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">UZ<span>Shop</span></div>
+  <input id="search" class="search" placeholder="Mahsulot qidirish...">
+  <button class="cart-btn" onclick="openCart()">🛒 Savat (<span id="count">0</span>)</button>
+</header>
+
+<section class="hero">
+  <h1>Kerakli narsangiz shu yerda 🛍️</h1>
+  <p>Gaming, dasturlash va kompyuter uchun kerakli texnikalar bir joyda.</p>
+  <button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Mahsulotlarni ko‘rish</button>
+</section>
+
+<main class="container">
+  <div class="categories">
+    <button class="cat active" onclick="filterCat('Barchasi',this)">Barchasi</button>
+    <button class="cat" onclick="filterCat('Quloqchin',this)">🎧 Quloqchin</button>
+    <button class="cat" onclick="filterCat('Sichqoncha',this)">🖱️ Sichqoncha</button>
+    <button class="cat" onclick="filterCat('Klaviatura',this)">⌨️ Klaviatura</button>
+  </div>
+
+  <div id="products" class="grid"></div>
+</main>
+
+<footer>© 2026 UZShop — Online do‘kon</footer>
+
+<div id="overlay" class="overlay">
+  <div class="cart">
+    <button class="close" onclick="closeCart()">×</button>
+    <h2>🛒 Savatingiz</h2>
+    <div id="cartItems"></div>
+    <div class="total">Jami: <span id="total">0</span> so‘m</div>
+    <button class="order" onclick="order()">Buyurtma berish</button>
+  </div>
+</div>
+
+<script>
+const products=[
+ {id:1,name:"2E Gaming Headset HG340 7.1 Black",cat:"Quloqchin",price:299000,img:"https://2egaming.com/wp-content/uploads/2025/04/66054af2b76ba_6166a56692331_2e-hg340bk-7.1_001.jpg",desc:"7.1 virtual surround, RGB yoritish va mikrofon."},
+ {id:2,name:"2E Gaming Mouse MG315 Black",cat:"Sichqoncha",price:159000,img:"https://2egaming.com/wp-content/uploads/2026/02/698efd27a89db_2e-mg315ubk_001.jpg",desc:"50 g ultra-yengil gaming sichqoncha, PixArt 3327."},
+ {id:3,name:"2E Gaming Keyboard KG315 RGB",cat:"Klaviatura",price:249000,img:"https://2egaming.com/wp-content/uploads/2025/04/651457b0649e6_2e-kg315ubk_01-kopiya.jpg",desc:"104 tugma, macro tugmalar va RGB yoritish."},
+ {id:4,name:"2E Gaming Headset HG340 Black",cat:"Quloqchin",price:289000,img:"https://2egaming.com/wp-content/uploads/2025/04/661d19bba1dc1_660aa0d09f989_2e-hg340bk_001-1.jpg",desc:"RGB yoritish, mikrofon va 3.5 mm ulanish."},
+
+ {id:5,name:"Gaming Monitor 24 inch 165Hz",cat:"Monitor",price:1899000,img:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=85",desc:"24 dyuym Full HD monitor, 165Hz — gaming uchun."},
+ {id:6,name:"Mechanical RGB Gaming Keyboard",cat:"Gaming",price:429000,img:"https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=900&q=85",desc:"Mexanik tugmalar, RGB yoritish va USB ulanish."},
+ {id:7,name:"Wireless Gaming Mouse",cat:"Gaming",price:349000,img:"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=900&q=85",desc:"Yengil korpus, sozlanadigan DPI va simsiz ulanish."},
+ {id:8,name:"Gaming Mouse Pad XL",cat:"Gaming",price:159000,img:"https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=85",desc:"Katta XL yuzasi, klaviatura va sichqoncha uchun."},
+ {id:9,name:"USB Gaming Microphone",cat:"Gaming",price:499000,img:"https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=900&q=85",desc:"Kompyuterda stream, Discord va video uchun mikrofon."},
+ {id:10,name:"Game Controller Wireless",cat:"Gaming",price:399000,img:"https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=900&q=85",desc:"PC o‘yinlari uchun qulay simsiz gamepad."},
+ {id:11,name:"Laptop Cooling Stand",cat:"Gaming",price:279000,img:"https://images.unsplash.com/photo-1593642702749-78dc7f6736d9?auto=format&fit=crop&w=900&q=85",desc:"Noutbukni sovitish va qulay balandlikda ishlatish uchun."},
+ {id:12,name:"RGB Gaming Desk Lamp",cat:"Gaming",price:219000,img:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85",desc:"Gaming stoliga mos zamonaviy LED yoritish."},
+
+ {id:13,name:"Developer Mechanical Keyboard",cat:"Dasturlash",price:549000,img:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85",desc:"Uzoq kod yozish uchun qulay mexanik klaviatura."},
+ {id:14,name:"Ergonomic Programmer Mouse",cat:"Dasturlash",price:379000,img:"https://images.unsplash.com/photo-1563297007-0686b7003af7?auto=format&fit=crop&w=900&q=85",desc:"Dasturlash va ofis ishlari uchun ergonomik sichqoncha."},
+ {id:15,name:"Developer Monitor 27 inch",cat:"Dasturlash",price:2399000,img:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=85",desc:"27 dyuym katta ekran — kod va bir nechta oynalar uchun."},
+ {id:16,name:"USB-C Hub 7-in-1",cat:"Aksessuar",price:329000,img:"https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&w=900&q=85",desc:"USB, HDMI va boshqa portlarni bitta hubga jamlaydi."},
+ {id:17,name:"External SSD 1TB",cat:"Aksessuar",price:1099000,img:"https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=85",desc:"Fayllar, loyihalar va o‘yinlar uchun tezkor tashqi SSD."},
+ {id:18,name:"Laptop Stand Aluminum",cat:"Dasturlash",price:249000,img:"https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=900&q=85",desc:"Noutbuk ekranini qulay balandlikka ko‘taradi."},
+ {id:19,name:"1080p USB Webcam",cat:"Aksessuar",price:319000,img:"https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=900&q=85",desc:"Online dars, meeting va dasturchilar uchun video aloqa."},
+ {id:20,name:"USB Flash Drive 128GB",cat:"Aksessuar",price:119000,img:"https://images.unsplash.com/photo-1624996379697-f01d168b1a52?auto=format&fit=crop&w=900&q=85",desc:"Kodlar, hujjatlar va boshqa fayllarni ko‘chirish uchun."}
+];
+let cart=[];
+let currentCat="Barchasi";
+
+function money(n){return n.toLocaleString('uz-UZ')}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=products.filter(p=>(currentCat==="Barchasi"||p.cat===currentCat)&&p.name.toLowerCase().includes(q));
+ document.getElementById("products").innerHTML=list.map(p=>`
+ <div class="card">
+  <div class="pic"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+  <div class="info">
+   <h3>${p.name}</h3><p>${p.desc}</p>
+   <div class="price">${money(p.price)} so‘m</div>
+   <button class="add" onclick="add(${p.id})">🛒 Savatga qo‘shish</button>
+  </div>
+ </div>`).join("") || '<p>Mahsulot topilmadi.</p>';
+}
+function add(id){
+ const x=cart.find(i=>i.id===id);
+ if(x)x.qty++; else cart.push({id,qty:1});
+ updateCart();
+}
+function change(id,d){
+ const x=cart.find(i=>i.id===id); if(!x)return;
+ x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);updateCart();
+}
+function updateCart(){
+ let total=0,count=0;
+ document.getElementById("cartItems").innerHTML=cart.length?cart.map(i=>{
+  const p=products.find(x=>x.id===i.id);total+=p.price*i.qty;count+=i.qty;
+  return `<div class="cart-item"><img class="cart-img" src="${p.img}" alt="${p.name}"><div><strong>${p.name}</strong>${money(p.price)} so‘m<br><div class="qty"><button onclick="change(${p.id},-1)">−</button> ${i.qty} <button onclick="change(${p.id},1)">+</button></div></div></div>`;
+ }).join(""):'<div class="empty">Savat hozircha bo‘sh.</div>';
+ document.getElementById("count").textContent=count;
+ document.getElementById("total").textContent=money(total);
+}
+function openCart(){document.getElementById("overlay").style.display="block";updateCart()}
+function closeCart(){document.getElementById("overlay").style.display="none"}
+function filterCat(cat,btn){currentCat=cat;document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));btn.classList.add("active");render()}
+function order(){
+ if(!cart.length){alert("Avval mahsulot qo‘shing!");return}
+ alert("Buyurtma qabul qilish demo rejimida ishlayapti. Keyin Telegram yoki backend ulash mumkin.");
+}
+document.getElementById("search").addEventListener("input",render);
+render();updateCart();
+</script>
+</body>
+</html>
